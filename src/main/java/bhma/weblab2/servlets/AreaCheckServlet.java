@@ -8,6 +8,8 @@ import jakarta.servlet.http.*;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class AreaCheckServlet extends HttpServlet {
     @Override
@@ -17,6 +19,10 @@ public class AreaCheckServlet extends HttpServlet {
         double y = Double.parseDouble(request.getParameter("y").replace(',', '.'));
         double r = Double.parseDouble(request.getParameter("r").replace(',', '.'));
         String currentTime = request.getParameter("currentTime");
+        if (currentTime == null) {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+            currentTime = LocalTime.now().format(dtf);
+        }
         boolean hit = check(x, y, r);
         final long endTime = System.nanoTime();
 
