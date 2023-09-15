@@ -25,16 +25,14 @@ public class AreaCheckServlet extends HttpServlet {
         }
         boolean hit = check(x, y, r);
         final long endTime = System.nanoTime();
-
-        TableRow tableRow = new TableRow(x, y, r, hit ? HitResult.HIT : HitResult.MISS, currentTime, (endTime - startTime) / 1000);
-
+        TableRow tableRow = new TableRow(x, y, r, hit ? HitResult.HIT : HitResult.MISS, currentTime,
+                (endTime - startTime) / 1000.0);
         ResultTable results = (ResultTable) request.getSession().getAttribute("table");
         if (results == null) {
             results = new ResultTable();
         }
         results.addRow(tableRow);
         request.getSession().setAttribute("table", results);
-
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter writer = response.getWriter();
         StringBuilder rows = new StringBuilder();

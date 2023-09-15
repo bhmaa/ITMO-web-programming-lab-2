@@ -25,7 +25,7 @@ function drawGraph() {
     context.fill();
     context.beginPath();
     context.moveTo(300, 200);
-    context.arc(200, 200, 100, 0, Math.PI/2);
+    context.arc(200, 200, 100, 0, Math.PI / 2);
     context.lineTo(200, 200);
     context.fill();
     context.globalAlpha = 1;
@@ -52,29 +52,36 @@ function drawDot(x, y, color) {
 $(document).ready(function () {
     drawGraph();
     const canvas = document.getElementById("graphic");
+
     canvas.addEventListener("click", function (e) {
         const r = document.querySelector('#r').value;
         let offset = $(canvas).offset();
-        const x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft - Math.floor(offset.left);
-        const y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop - Math.floor(offset.top) + 1;
-        $.ajax({
-            url: "ControllerServlet",
-            method: "GET",
-            dataType: "html",
-            data: {
-                x: (x - 200) / 100 * r,
-                y: (200 - y) / 100 * r,
-                r: r,
-                currentTime: new Date().toLocaleTimeString()
-            },
-            success: function (data) {
-                drawDot(x, y, '#FFFFFF');
-                document.querySelector("#body").innerHTML = data;
-            },
-            error: function (error) {
-                console.log(error);
-            },
-        });
+        const x = Math.round(((e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft
+            - Math.floor(offset.left)) - 200) / 100 * r);
+        const y = ((200 - (e.clientY + document.body.scrollTop + document.documentElement.scrollTop
+            - Math.floor(offset.top) + 1)) / 100 * r).toFixed(9);
+        if (x < -3 || x > 5 || y < -5 || y > 3) {
+            alert("data not allowed\nx: " + x + ", y: " + y + ", r: " + r)
+        } else {
+            $.ajax({
+                url: "ControllerServlet",
+                method: "GET",
+                dataType: "html",
+                data: {
+                    x: x,
+                    y: y,
+                    r: r,
+                    currentTime: new Date().toLocaleTimeString()
+                },
+                success: function (data) {
+                    drawDot((x / r * 100 + 200), 200 - (y / r * 100), '#FFFFFF');
+                    document.querySelector("#body").innerHTML = data;
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
     });
 });
 

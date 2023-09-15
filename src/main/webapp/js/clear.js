@@ -5,7 +5,7 @@ $(document).ready(function () {
             method: "GET",
             dataType: "html",
             data: {
-                clear: true
+                action: "clear"
             },
             success: function () {
                 $("#body").html("");

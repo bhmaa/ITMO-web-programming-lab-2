@@ -1,16 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:useBean id="table" class="bhma.weblab2.beans.ResultTable" scope="session" />
+<jsp:useBean id="table" class="bhma.weblab2.beans.ResultTable" scope="session"/>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>web lab 2</title>
+    <title>web lab №2</title>
     <link href="css/style.css" rel="stylesheet">
+    <link rel="icon" href="img/favicon.png">
 </head>
 <body>
 <div class="container">
     <div class="header">
-        <h1 class="info">starikova daria, group p32312, var. 3231210</h1>
+        <h1>student: starikova daria</h1>
+        <h2>group: p3231</h2>
+        <h2>var: 3231210</h2>
     </div>
     <div class="graph">
         <canvas id="graphic" width="400px" height="400px"></canvas>
@@ -58,7 +61,7 @@
                 <th>r value</th>
                 <th>result</th>
                 <th>current time</th>
-                <th>execution time (ms)</th>
+                <th>execution time (microseconds)</th>
             </tr>
             </thead>
             <tbody id="body">
@@ -76,10 +79,9 @@
         </table>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="js/validation.js"></script>
 <script src="js/clear.js"></script>
-<script src="js/graphics.js"></script>
+<script src="js/coordinate.js"></script>
 </body>
 </html>

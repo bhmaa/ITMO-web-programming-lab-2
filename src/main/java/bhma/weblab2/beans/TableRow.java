@@ -8,12 +8,12 @@ public class TableRow implements Serializable {
     private double r;
     private HitResult hitResult;
     private String currentTime;
-    private long executionTime;
+    private double executionTime;
 
     public TableRow() {
     }
 
-    public TableRow(double x, double y, double r, HitResult hitResult, String currentTime, long executionTime) {
+    public TableRow(double x, double y, double r, HitResult hitResult, String currentTime, double executionTime) {
         this.x = x;
         this.y = y;
         this.r = r;
@@ -62,11 +62,11 @@ public class TableRow implements Serializable {
         this.currentTime = currentTime;
     }
 
-    public long getExecutionTime() {
+    public double getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(long executionTime) {
+    public void setExecutionTime(double executionTime) {
         this.executionTime = executionTime;
     }
 }
