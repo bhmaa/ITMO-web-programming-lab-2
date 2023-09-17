@@ -6,6 +6,7 @@
 <head>
     <title>web lab №2</title>
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/form_style.css" rel="stylesheet">
     <link rel="icon" href="img/favicon.png">
 </head>
 <body>
@@ -16,40 +17,45 @@
         <h2>var: 3231210</h2>
     </div>
     <div class="graph">
-        <canvas id="graphic" width="400px" height="400px"></canvas>
+        <canvas id="graphic" width="420px" height="420px"></canvas>
     </div>
-    <div class="form" id="form">
-        <div class="x-select">
-            <label for="x">select x</label><br>
-            <select id="x" class="select" name="x">
-                <option value="-3">-3</option>
-                <option value="-2">-2</option>
-                <option value="-1">-1</option>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </div>
-        <div class="y-text">
-            <label for="y">enter y</label><br>
-            <input id="y" maxlength="12" placeholder="-5...3" type="text" name="y"/>
-        </div>
-        <div class="r-select">
-            <label for="r">select r</label><br>
-            <select id="r" class="select" name="r">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-        </div>
-        <div class="buttons">
-            <button type="submit" id="submit-button" class="button" onclick="validate()">check</button>
-            <button type="button" id="clear-button" class="button">clear</button>
+    <div class="form">
+        <form action="controller" method="get" id="coordinates">
+            <div class="x-select">
+                <label for="x">select x</label><br>
+                <select id="x" class="select" name="x">
+                    <option value="-3">-3</option>
+                    <option value="-2">-2</option>
+                    <option value="-1">-1</option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <div class="y-text">
+                <label for="y" id="y-label">enter y</label><br>
+                <input id="y" maxlength="12" placeholder="-5...3" type="text" name="y"/>
+            </div>
+            <div class="r-select">
+                <label for="r">select r</label><br>
+                <select id="r" class="select" name="r">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+            <input id="hidden-timezone" type="hidden" name="timezone" value="">
+            <div class="button-wrap" id="submit-wrap">
+                <button type="submit" id="submit-button">check</button>
+            </div>
+        </form>
+        <div class="button-wrap" id="clear-wrap">
+            <button type="button" id="clear-button">clear</button>
         </div>
     </div>
     <div class="results-holder">
@@ -61,7 +67,7 @@
                 <th>r value</th>
                 <th>result</th>
                 <th>current time</th>
-                <th>execution time (microseconds)</th>
+                <th>execution time (ns)</th>
             </tr>
             </thead>
             <tbody id="body">
@@ -80,8 +86,20 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="js/validation.js"></script>
-<script src="js/clear.js"></script>
-<script src="js/coordinate.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.2/jquery.validate.min.js"></script>
+<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="js/validator.js"></script>
+<script src="js/reset.js"></script>
+<script src="js/chart.js"></script>
+<script>
+    <%
+    for (int i = 0; i < table.getResults().size(); i++) {
+    %>
+    drawDot(<%=table.getResults().get(i).getX() / table.getResults().get(i).getR() * 100 + 210%>,
+        <%=210 - (table.getResults().get(i).getY() / table.getResults().get(i).getR() * 100)%>, '#ccffcc');
+    <%
+    }
+    %>
+</script>
 </body>
 </html>
