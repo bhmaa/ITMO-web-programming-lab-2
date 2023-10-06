@@ -41,7 +41,7 @@
         </table>
     </div>
     <div class="button-holder">
-        <a href="<%=request.getContextPath()%>/">
+        <a href="<%=request.getContextPath()%>/index.jsp">
             <button id="back-button">back</button>
         </a>
     </div>

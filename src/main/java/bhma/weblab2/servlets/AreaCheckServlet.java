@@ -3,21 +3,19 @@ package bhma.weblab2.servlets;
 import bhma.weblab2.beans.HitResult;
 import bhma.weblab2.beans.ResultTable;
 import bhma.weblab2.beans.TableRow;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-@WebServlet("/check")
 public class AreaCheckServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         final long startTime = System.nanoTime();
 
         double x = Double.parseDouble(request.getParameter("x").replace(',', '.'));
@@ -41,12 +39,12 @@ public class AreaCheckServlet extends HttpServlet {
         results.addRow(tableRow);
         request.getSession().setAttribute("table", results);
 
-        request.getServletContext().getRequestDispatcher("/results.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/results.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
+        request.getServletContext().getRequestDispatcher(request.getContextPath()).forward(request, response);
     }
 
     private boolean check(double x, double y, double r) {
