@@ -101,10 +101,9 @@
     });
 
     function drawDots() {
-        <% for (int i = 0; i < table.getResults().size(); i++) { %>
-        drawDot(<%=160 + table.getResults().get(i).getX() * 50%>,
-            <%=160 - table.getResults().get(i).getY() * 50%>, '#ccffcc');
-        <% } %>
+        <c:forEach var="row" items="${table.results}">
+        drawDot(160 + ${row.x} * 50, 160 - ${row.y} * 50, '#ccffcc');
+        </c:forEach>
     }
 </script>
 </body>
