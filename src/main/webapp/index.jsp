@@ -92,14 +92,20 @@
 <script src="js/reset.js"></script>
 <script src="js/chart.js"></script>
 <script>
-    <%
-    for (int i = 0; i < table.getResults().size(); i++) {
-    %>
-    drawDot(<%=table.getResults().get(i).getX() / table.getResults().get(i).getR() * 100 + 210%>,
-        <%=210 - (table.getResults().get(i).getY() / table.getResults().get(i).getR() * 100)%>, '#ccffcc');
-    <%
+    $(document).ready(function () {
+        drawDots();
+        $('#r').on('change', function () {
+            drawGraph(document.getElementById('r').value);
+            drawDots();
+        });
+    });
+
+    function drawDots() {
+        <% for (int i = 0; i < table.getResults().size(); i++) { %>
+        drawDot(<%=160 + table.getResults().get(i).getX() * 50%>,
+            <%=160 - table.getResults().get(i).getY() * 50%>, '#ccffcc');
+        <% } %>
     }
-    %>
 </script>
 </body>
 </html>
