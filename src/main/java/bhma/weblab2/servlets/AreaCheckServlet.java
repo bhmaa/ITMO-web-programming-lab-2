@@ -3,7 +3,7 @@ package bhma.weblab2.servlets;
 import bhma.weblab2.beans.HitResult;
 import bhma.weblab2.beans.ResultTable;
 import bhma.weblab2.beans.TableRow;
-import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,11 +40,6 @@ public class AreaCheckServlet extends HttpServlet {
         request.getSession().setAttribute("table", results);
 
         response.sendRedirect(request.getContextPath() + "/results.jsp");
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getServletContext().getRequestDispatcher(request.getContextPath()).forward(request, response);
     }
 
     private boolean check(double x, double y, double r) {

@@ -21,12 +21,7 @@ public class ControllerServlet extends HttpServlet {
             request.getServletContext().getRequestDispatcher("/check").forward(request, response);
             return;
         }
-        request.getServletContext().getRequestDispatcher(request.getContextPath()).forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getServletContext().getRequestDispatcher(request.getContextPath()).forward(request, response);
+        response.sendError(400, "Invalid coordinates");
     }
 
     private boolean isDataCorrect(String str) {
