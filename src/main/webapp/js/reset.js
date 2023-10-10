@@ -1,9 +1,8 @@
 $(document).ready(function () {
     $("#clear-button").click(function () {
         $.ajax({
-            url: "/controller",
+            url: "controller",
             method: "GET",
-            dataType: "html",
             data: {
                 action: "clear"
             },

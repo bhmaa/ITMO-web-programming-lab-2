@@ -82,8 +82,8 @@ $(document).ready(function () {
 function clearDots() {
     const canvas = document.getElementById("graphic");
     const context = canvas.getContext('2d');
-    context.clearRect(0, 0, 400, 400);
-    drawGraph();
+    context.clearRect(0, 0, 420, 420);
+    drawGraph(document.getElementById('r').value);
 }
 
 function drawArrow(context, fromx, fromy, tox, toy) {
