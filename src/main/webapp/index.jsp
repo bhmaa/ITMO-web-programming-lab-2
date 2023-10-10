@@ -93,16 +93,16 @@
 <script src="js/chart.js"></script>
 <script>
     $(document).ready(function () {
-        drawDots();
+        drawDots(1);
         $('#r').on('change', function () {
             drawGraph(document.getElementById('r').value);
-            drawDots();
+            drawDots(document.getElementById('r').value);
         });
     });
 
-    function drawDots() {
+    function drawDots(r) {
         <c:forEach var="row" items="${table.results}">
-        drawDot(160 + ${row.x} * 50, 160 - ${row.y} * 50, '#ccffcc');
+        drawDot(210 + ${row.x} / ${row.r} * r * 40, 210 - ${row.y} / ${row.r} * r * 40, '#ccffcc');
         </c:forEach>
     }
 </script>
